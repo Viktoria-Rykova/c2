@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document with Table of Contents</title>
+    <style>
+        body { font-family: 'Times New Roman', serif; }
+        nav { margin-bottom: 20px; }
+        section { margin-bottom: 40px; }
+        button { margin: 5px; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>User Guide</h1>
+    <nav>
+        <h2>Contents</h2>
+        <ul>
+            <li><a href="#section1">Application Purpose</a></li>
+            <li><a href="#section2">Built-in Menu Items</a>
+                <ul>
+                    <li><a href="#file">File</a></li>
+                    <li><a href="#edit">Edit</a></li>
+                    <li><a href="#texti">Text</a></li>
+                    <li><a href="#start">Start</a></li>
+                    <li><a href="#text">Help</a></li>
+                    <li><a href="#language">Localization</a></li>
+                    <li><a href="#view">View</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    
+    <section id="section1">
+        <h2>Application Purpose</h2>
+        <p>The main purpose of the application is to scan a Python dictionary for invalid values. The task is to analyze the dictionary content and check for forbidden characters or values in keys or values.</p>
+    </section>
+    
+    <section id="section2">
+        <h2>Built-in Menu Items</h2>
+        
+        <section id="file">
+            <h3>File</h3>
+            <p>This menu item is responsible for working with files.</p>
+            <ul>
+                <li><strong>Create</strong> – create a new file.</li>
+                <li><strong>Open</strong> – open an existing file.</li>
+                <li><strong>Save</strong> – save the current file.</li>
+                <li><strong>Save As</strong> – save the file under a different name.</li>
+                <li><strong>Exit</strong> – exit the compiler.</li>
+            </ul>
+        </section>
+        
+        <section id="edit">
+            <h3>Edit</h3>
+            <p>This menu item contains text editing tools.</p>
+            <ul>
+                <li><strong>Undo</strong> – undo the last action.</li>
+                <li><strong>Redo</strong> – redo the undone action.</li>
+                <li><strong>Cut</strong> – cut the selected text and save it to the clipboard.</li>
+                <li><strong>Copy</strong> – copy the selected text to the clipboard.</li>
+                <li><strong>Paste</strong> – paste text from the clipboard.</li>
+                <li><strong>Delete</strong> – delete a text fragment.</li>
+                <li><strong>Select All</strong> – select the entire text fragment.</li>
+            </ul>
+        </section>
+
+        <section id="texti">
+            <h3>Text</h3>
+            <p>This menu item provides access to theoretical materials.</p>
+            <ul>
+                <li><strong>Problem Statement</strong> – information about dictionaries, example.</li>
+                <li><strong>Grammar</strong> – grammar in Chomsky notation.</li>
+                <li><strong>Grammar Classification</strong> – grammar type definition.</li>
+                <li><strong>Analysis Method</strong> – state diagram.</li>
+                <li><strong>Test Example</strong> – compiler capabilities.</li>
+                <li><strong>References</strong></li>
+                <li><strong>Source Code</strong></li>
+            </ul>
+        </section>
+
+        <section id="start">
+            <h3>Start</h3>
+            <p>This menu item is responsible for starting the compiler. You can also use the button below.</p>
+        </section>
+        
+        <section id="text">
+            <h3>Help</h3>
+            <p>This menu item provides help and information.</p>
+            <ul>
+                <li><strong>Help</strong> – user guide for the compiler.</li>
+                <li><strong>About</strong> – basic program information and contact details.</li>
+            </ul>
+        </section>
+
+        <section id="language">
+            <h3>Localization</h3>
+            <p>This menu item is responsible for switching the language. The most common languages are available: Russian and English.</p>
+        </section>
+
+        <section id="view">
+            <h3>View</h3>
+            <p>This menu item allows changing the font size.</p>
+        </section>
+    </section>
+</body>
+</html>

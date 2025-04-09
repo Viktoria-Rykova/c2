@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Грамматика объявления словаря с инициализацией на языке Python</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #2e3b4e;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        ul {
+            list-style-type: none;
+        }
+        .grammar, .terms {
+            margin-top: 20px;
+        }
+        .grammar li, .terms li {
+            margin: 5px 0;
+        }
+        .rules, .symbols {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Грамматика объявления словаря с инициализацией на языке Python</h1>
+    
+    <section class="grammar">
+        <h2>Грамматика G[‹Start›] (в нотации Хомского)</h2>
+        <ul>
+            <li><strong>Продукции P:</strong></li>
+            <li><pre>1. ‹Start› → ‹Letter›‹IdRem›</pre></li>
+            <li><pre>2. ‹IdRem› → ‹Letter›‹IdRem›</pre></li>
+            <li><pre>3. ‹IdRem› → ‹Digit›‹IdRem›</pre></li>
+            <li><pre>4. ‹IdRem› → ‘=’ ‹Num›</pre></li>
+            <li><pre>5. ‹Num› → ‘{’ ‹OpenBrace›</pre></li>
+            <li><pre>6. ‹OpenBrace› → ‹Pairs›‹MorePairs›</pre></li>
+            <li><pre>7. ‹MorePairs› → ‘,’ ‹Pairs›‹MorePairs›</pre></li>
+            <li><pre>8. ‹Pairs› → ‹Key› ‘:’ ‹Value›</pre></li>
+            <li><pre>9. ‹Key› → ‹Digit› ‹NumRem›</pre></li>
+            <li><pre>10. ‹NumRem› → ‹Digit› ‹NumRem›</pre></li>
+            <li><pre>11. ‹Value› → ‘’’ ‹Str›</pre></li>
+            <li><pre>12. ‹Str› → ‹Symbol› ‹StrRem›</pre></li>
+            <li><pre>13. ‹StrRem› → ‘’’ ‹Str1›</pre></li>
+            <li><pre>14. ‹MorePairs› → ‘}’ ‹End›</pre></li>
+            <li><pre>15. ‹End› → ‘;’</pre></li>
+        </ul>
+    </section>
+    
+    <section class="terms">
+        <h2>Терминальные символы (VT)</h2>
+        <ul>
+            <li><pre>{a, b, c, ..., z, A, B, C, ..., Z, !, ., ,, ?, №, #, ^, @, $, ;, :, %, &, *, (, ), -, _, =, +, /, \, |, <, >, ~, `, [, ], {, }, ‘, 0, 1, 2, ..., 9}</pre></li>
+        </ul>
+    </section>
+
+    <section class="non-terminal">
+        <h2>Нетерминальные символы (VN)</h2>
+        <ul>
+            <li><pre>{‹Start›, ‹Id›, ‹IdRem›, ‹Num›, ‹OpenBrace›, ‹Pairs›, ‹MorePairs›, ‹Pair›, ‹Key›, ‹StrKey›, ‹NumKey›, ‹Str›, ‹StrRem›, ‹NumRem›, ‹Value›, ‹Symbol›, ‹End›}</pre></li>
+        </ul>
+    </section>
+    
+    <section class="rules">
+        <h2>Пример работы грамматики</h2>
+        <p>Пример синтаксического разбора записи словаря на Python:</p>
+        <pre>
+Dict = {1: 'Dima', 2: 'Vika'};
+        </pre>
+    </section>
+    
+</body>
+</html>

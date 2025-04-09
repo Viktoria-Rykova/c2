@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LexicalAnalyzer.cs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: "Courier New", monospace;
+            font-size: 14px;
+        }
+        .keyword {
+            color: #0000ff;
+        }
+        .string {
+            color: #d14;
+        }
+        .comment {
+            color: #008000;
+        }
+        .error {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Код класса LexicalAnalyzer</h1>
+    <pre><code>
+<span class="keyword">using</span> System;
+<span class="keyword">using</span> System.Collections.Generic;
+<span class="keyword">using</span> System.Drawing;
+<span class="keyword">using</span> System.Linq;
+<span class="keyword">using</span> System.Text.RegularExpressions;
+<span class="keyword">using</span> System.Windows.Forms;
+
+<span class="keyword">namespace</span> компилятор_2
+{
+    <span class="keyword">internal</span> class LexicalAnalyzer
+    {
+        <span class="keyword">public</span> List&lt;(int Code, string Type, string Lexeme, int StartPos, int EndPos, Color HighlightColor)&gt; AnalyzeText(string input)
+        {
+            <span class="keyword">var</span> results = <span class="keyword">new</span> List&lt;(int, string, string, int, int, Color)&gt;();
+            <span class="keyword">int</span> i = 0;
+            <span class="keyword">Color</span> defaultColor = <span class="keyword">Color</span>.Black;
+            <span class="keyword">Color</span> errorColor = <span class="keyword">Color</span>.Pink;
+
+            <span class="keyword">while</span> (i &lt; input.Length && <span class="keyword">char</span>.IsWhiteSpace(input[i])) i++;
+
+            <span class="keyword">int</span> start = i;
+            <span class="keyword">bool</span> errorInId = <span class="keyword">false</span>;
+
+            <span class="keyword">char</span>[] invalidChars = { '@', '№', '#', '$', '%', '^', '&', '*', '!', '"', '\'', '<', '>', '/', '\\', '|', '.', '?', '~',
+                         'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С',
+                         'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ы', 'Э', 'Ю', 'Я', 'а', 'б', 'в', 'г', 'д', 'е', 'ё',
+                         'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш',
+                         'щ', 'ы', 'э', 'ю', 'я' };
+
+            <span class="keyword">while</span> (i &lt; input.Length && input[i] != '=')
+            {
+                <span class="keyword">char</span> c = input[i];
+
+                <span class="keyword">if</span> (Array.Exists(invalidChars, element =&gt; element == c))
+                {
+                    <span class="keyword">if</span> (i &gt; start)
+                    {
+                        results.Add((2, "Идентификатор", input.Substring(start, i - start), start + 1, i, defaultColor));
+                    }
+                    results.Add((-1, <span class="string">"Ошибка (недопустимый символ '{c}')"</span>, c.ToString(), i + 1, i + 1, errorColor));
+                    i++;
+                    <span class="keyword">while</span> (i &lt; input.Length && input[i] != '=') i++;
+                    errorInId = <span class="keyword">true</span>;
+                    <span class="keyword">break</span>;
+                }
+
+                <span class="keyword">if</span> (!<span class="keyword">char</span>.IsLetterOrDigit(c) && c != '_')
+                {
+                    <span class="keyword">if</span> (i == start)
+                    {
+                        results.Add((-1, <span class="string">"Ошибка (недопустимый символ '{c}')"</span>, c.ToString(), i + 1, i + 1, errorColor));
+                        i++;
+                        <span class="keyword">while</span> (i &lt; input.Length && input[i] != '=') i++;
+                        <span class="keyword">break</span>;
+                    }
+                    <span class="keyword">else</span>
+                    {
+                        results.Add((2, "Идентификатор", input.Substring(start, i - start), start + 1, i, defaultColor));
+                        results.Add((-1, <span class="string">"Ошибка (недопустимый символ '{c}')"</span>, c.ToString(), i + 1, i + 1, errorColor));
+                        i++;
+                        <span class="keyword">while</span> (i &lt; input.Length && input[i] != '=') i++;
+                        errorInId = <span class="keyword">true</span>;
+                        <span class="keyword">break</span>;
+                    }
+                }
+                i++;
+            }
+
+            <span class="keyword">if</span> (!errorInId && start != i)
+            {
+                results.Add((2, "Идентификатор", input.Substring(start, i - start), start + 1, i, defaultColor));
+            }
+
+            <span class="keyword">while</span> (i &lt; input.Length && <span class="keyword">char</span>.IsWhiteSpace(input[i])) i++;
+
+            <span class="keyword">if</span> (i &lt; input.Length && input[i] == '=')
+            {
+                results.Add((10, "Оператор присваивания", "=", i + 1, i + 1, defaultColor));
+                i++;
+            }
+
+            <span class="keyword">while</span> (i &lt; input.Length && <span class="keyword">char</span>.IsWhiteSpace(input[i])) i++;
+
+            <span class="keyword">while</span> (i &lt; input.Length)
+            {
+                <span class="keyword">while</span> (i &lt; input.Length && <span class="keyword">char</span>.IsWhiteSpace(input[i])) i++; 
+
+                <span class="keyword">if</span> (i &gt;= input.Length) <span class="keyword">break</span>;
+
+                <span class="keyword">char</span> c = input[i];
+
+                <span class="keyword">if</span> (c == ',')
+                {
+                    results.Add((15, "Оператор запятая", ",", i + 1, i + 1, defaultColor));
+                    i++;
+                    <span class="keyword">continue</span>;
+                }
+                <span class="keyword">if</span> (c == '{')
+                {
+                    results.Add((13, "Фигурная скобка открывающая", "{", i + 1, i + 1, defaultColor));
+                    i++;
+                    <span class="keyword">continue</span>;
+                }
+                
+                <span class="keyword">if</span> (c == '}')
+                {
+                    results.Add((14, "Фигурная скобка закрывающая", "}", i + 1, i + 1, defaultColor));
+                    i++;
+                    <span class="keyword">continue</span>;
+                }
+                <span class="keyword">if</span> (c == ':')
+                {
+                    results.Add((11, "Оператор двоеточие", ":", i + 1, i + 1, defaultColor));
+                    i++;
+                    <span class="keyword">continue</span>;
+                }
+
+                <span class="keyword">if</span> (c == ';')
+                {
+                    results.Add((16, "Оператор конца", ";", i + 1, i + 1, defaultColor));
+                    i++;
+                    <span class="keyword">continue</span>;
+                }
+                <span class="keyword">if</span> (c == '\'' || c == '"')
+                {
+                    <span class="keyword">char</span> quote = c;
+                    <span class="keyword">int</span> j = i + 1;
+                    <span class="keyword">while</span> (j &lt; input.Length && input[j] != quote) j++;
+                    <span class="keyword">if</span> (j &lt; input.Length)
+                    {
+                        <span class="keyword">string</span> str = input.Substring(i, j - i + 1);
+                        results.Add((3, "Строка", str, i + 1, j + 1, defaultColor));
+                        i = j + 1;
+                    }
+                    <span class="keyword">else</span>
+                    {
+                        results.Add((-1, <span class="string">"Ошибка (несоответствующая кавычка)"</span>, "", i + 1, i + 1, errorColor));
+                        break;
+                    }
+                }
+                <span class="keyword">else</span> 
+                {
+                    results.Add((-1, <span class="string">"Ошибка (неопознанный символ)"</span>, c.ToString(), i + 1, i + 1, errorColor));
+                    i++;
+                }
+            }
+
+            <span class="keyword">return</span> results;
+        }
+    }
+}
+</code></pre>
+</body>
+</html>

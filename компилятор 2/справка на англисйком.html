@@ -1,0 +1,74 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head>     
+    <meta charset="UTF-8">     
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">     
+    <title>Document with Contents</title>     
+    <style>         
+        body { font-family: 'Times New Roman', serif; }         
+        nav { margin-bottom: 20px; }         
+        section { margin-bottom: 40px; }         
+        button { margin: 5px; padding: 10px; }     
+    </style> 
+</head> 
+<body>     
+    <h1>Document with Contents</h1>     
+    <nav>         
+        <h2>Contents</h2>         
+        <ul>             
+            <li><a href="#section1">Application Overview</a></li>             
+            <li><a href="#section2">Built-in Menu Items</a>                 
+                <ul>                     
+                    <li><a href="#file">File</a></li>                     
+                    <li><a href="#edit">Edit</a></li>                     
+                    <li><a href="#text">Help</a></li>                 
+                </ul>             
+            </li>         
+        </ul>     
+    </nav>          
+
+    <section id="section1">         
+        <h2>Application Overview</h2>         
+        <p>This application is a compiler with basic file management and text editing functions.</p>     
+    </section>          
+
+    <section id="section2">         
+        <h2>Built-in Menu Items</h2>                  
+
+        <section id="file">             
+            <h3>File</h3>             
+            <p>This menu item is responsible for file operations.</p>             
+            <ul>                 
+                <li><strong>New</strong> - create a new file.</li>                 
+                <li><strong>Open</strong> - open an existing file.</li>                 
+                <li><strong>Save</strong> - save the current file.</li>                 
+                <li><strong>Save As</strong> - save the file under a different name.</li>                 
+                <li><strong>Exit</strong> - exit the compiler.</li>              
+            </ul>         
+        </section>                  
+
+        <section id="edit">             
+            <h3>Edit</h3>             
+            <p>This menu item contains text editing tools.</p>             
+            <ul>                 
+                <li><strong>Undo</strong> - undo the last action.</li>                 
+                <li><strong>Redo</strong> - redo the undone action.</li>                 
+                <li><strong>Cut</strong> - delete the selected text and save it to the clipboard.</li>                 
+                <li><strong>Copy</strong> - copy the selected text to the clipboard.</li>                 
+                <li><strong>Paste</strong> - paste text from the clipboard.</li>                 
+                <li><strong>Delete</strong> - delete a text fragment.</li>                 
+                <li><strong>Select All</strong> - select the entire text fragment.</li>             
+            </ul>         
+        </section>                  
+
+        <section id="text">             
+            <h3>Help</h3>             
+            <p>This menu item allows text formatting.</p>             
+            <ul>                 
+                <li><strong>Help</strong> - instructions for the compiler.</li>                 
+                <li><strong>About</strong> - main information about the program and contact details.</li>             
+            </ul>         
+        </section>     
+    </section> 
+</body> 
+</html>
