@@ -40,20 +40,26 @@
  
 4 Метод анализа
 На рисунке 1 представлена диаграмма состояний сканера.
- 
+ ![image](https://github.com/user-attachments/assets/341e4eed-d632-434c-a52b-8e38599d0ba1)
+
 Рисунок 1 – Диаграмма состояний сканера 
 
 Грамматика G[‹Start›] является контекстно- свободной.
  
 6  Тестовые примеры
 На рисунках 3-8 представлены тестовые примеры запуска разработанного лексического анализатора.
- 
+ ![image](https://github.com/user-attachments/assets/96b0d6df-dd29-4cf8-a206-26c4ea21a0d3)
+
 Рисунок 2 – Тестовый пример 1
- 	
+ 	![image](https://github.com/user-attachments/assets/0ae503c5-cbb2-4fac-ad9b-31d20a64075e)
+
 Рисунок 3 – Тестовый пример 2
- 
+ ![image](https://github.com/user-attachments/assets/c22d4a22-6fc8-4382-9e54-b14423ecec42)
+
 Рисунок 4 – Тестовый пример 3
- 
+ ![image](https://github.com/user-attachments/assets/9f2ba050-8724-47d0-a6a5-cb50b2b7e742)
+
 Рисунок 5 – Тестовый пример 4
- 
+ ![image](https://github.com/user-attachments/assets/0be0889b-e2cf-4e62-9e84-36f185af3fa7)
+
 Рисунок 6 – Тестовый пример 5
