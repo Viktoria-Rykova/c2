@@ -38,7 +38,7 @@ namespace компилятор_2
             timer.Tick += Timer_Tick;
             timer.Start();
 
-
+            label1.Visible = true;
         }
 
         private void InitializeDataGridView()
@@ -419,55 +419,78 @@ namespace компилятор_2
         }
 
         private void toolStripButton9_Click(object sender, EventArgs e)
-        {  // Получаем активную вкладку
-            if (tabControl1.SelectedTab?.Controls.OfType<RichTextBox>().FirstOrDefault() is RichTextBox activeRtb)
+        {
+            TabPage activeTab = tabControl1.SelectedTab;
+            RichTextBox activeRichTextBox = activeTab.Controls.OfType<RichTextBox>().FirstOrDefault();
+
+            if (activeRichTextBox != null)
             {
-                try
+                string inputText = activeRichTextBox.Text;
+                LexicalAnalyzer lexicalAnalyzer = new LexicalAnalyzer();
+                var lexicalResults = lexicalAnalyzer.AnalyzeText(inputText);
+
+                dataGridView1.Rows.Clear();
+
+                bool hasLexicalErrors = lexicalResults.Any();
+
+                HashSet<int> processedPositions = new HashSet<int>();
+
+                activeRichTextBox.Select(0, 0); 
+
+                if (hasLexicalErrors)
                 {
-                    // Очищаем предыдущие подсветки
-                    activeRtb.SelectAll();
-                    activeRtb.SelectionBackColor = Color.White;
-
-                    // Анализируем текст
-                    LexicalAnalyzer analyzer = new LexicalAnalyzer();
-                    var results = analyzer.AnalyzeText(activeRtb.Text);
-
-                    // Подсвечиваем недопустимые символы
-                    foreach (var result in results)
+                    foreach (var result in lexicalResults)
                     {
-                        if (result.Code == -1)  // Ошибка - недопустимый символ
+                        int start = result.Position - 1;  
+
+                        if (!processedPositions.Contains(start))
                         {
-                            // Подсвечиваем ошибочный символ
-                            activeRtb.Select(result.StartPos - 1, result.EndPos - result.StartPos + 1);
-                            activeRtb.SelectionBackColor = result.HighlightColor;
+
+                            dataGridView1.Rows.Add(result.Problem, result.Position);
+
+                            processedPositions.Add(start);
                         }
                     }
 
-                    // Выводим информацию в DataGridView
-                    dataGridView1.Rows.Clear();
-                    if (results.Any())
-                    {
-                        foreach (var result in results)
-                        {
-                            // Добавляем строки в DataGridView
-                            dataGridView1.Rows.Add(result.Code, result.Type, result.Lexeme, $"{result.StartPos}-{result.EndPos}");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Анализ не дал результатов.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    // Отображаем сообщение о наличии лексических ошибок
+                    dataGridView1.Visible = true;
+                    label1.Visible = false;
+                    label1.Text = "Есть лексические ошибки.";
+                    return;  
                 }
-                catch (Exception ex)
+
+                SyntaxAnalyzer syntaxAnalyzer = new SyntaxAnalyzer(inputText);
+                bool syntaxSuccess = syntaxAnalyzer.Parse();
+
+                bool hasSyntaxErrors = syntaxAnalyzer.Errors.Any();
+
+                foreach (var error in syntaxAnalyzer.Errors)
                 {
-                    MessageBox.Show($"Произошла ошибка при анализе текста: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    int start = error.Position - 1;  
+
+                    if (!processedPositions.Contains(start))
+                    {
+                        dataGridView1.Rows.Add(error.Problem, error.Position);
+
+                        processedPositions.Add(start);
+                    }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Нет активного текстового редактора!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                if (!hasSyntaxErrors)
+                {
+                    dataGridView1.Visible = false;
+                    label1.Visible = true;
+                    label1.Text = "Ошибок не найдено";
+                }
+                else
+                {
+                    dataGridView1.Visible = true;
+                    label1.Visible = false;
+                }
             }
         }
+
+        
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

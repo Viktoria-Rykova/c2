@@ -34,10 +34,6 @@
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Lexeme = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -83,6 +79,9 @@
             this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
+            this.Lexeme = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -125,6 +124,7 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.White;
+            this.tabPage4.Controls.Add(this.label1);
             this.tabPage4.Controls.Add(this.dataGridView1);
             this.tabPage4.Controls.Add(this.statusStrip1);
             resources.ApplyResources(this.tabPage4, "tabPage4");
@@ -135,38 +135,12 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.LavenderBlush;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Code,
-            this.Type,
             this.Lexeme,
             this.Position});
             resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // Code
-            // 
-            resources.ApplyResources(this.Code, "Code");
-            this.Code.Name = "Code";
-            this.Code.ReadOnly = true;
-            // 
-            // Type
-            // 
-            resources.ApplyResources(this.Type, "Type");
-            this.Type.Name = "Type";
-            this.Type.ReadOnly = true;
-            // 
-            // Lexeme
-            // 
-            resources.ApplyResources(this.Lexeme, "Lexeme");
-            this.Lexeme.Name = "Lexeme";
-            this.Lexeme.ReadOnly = true;
-            // 
-            // Position
-            // 
-            resources.ApplyResources(this.Position, "Position");
-            this.Position.Name = "Position";
-            this.Position.ReadOnly = true;
             // 
             // statusStrip1
             // 
@@ -495,6 +469,23 @@
             this.toolStripButton11.Name = "toolStripButton11";
             this.toolStripButton11.Click += new System.EventHandler(this.toolStripButton11_Click);
             // 
+            // Lexeme
+            // 
+            resources.ApplyResources(this.Lexeme, "Lexeme");
+            this.Lexeme.Name = "Lexeme";
+            this.Lexeme.ReadOnly = true;
+            // 
+            // Position
+            // 
+            resources.ApplyResources(this.Position, "Position");
+            this.Position.Name = "Position";
+            this.Position.ReadOnly = true;
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -579,10 +570,9 @@
         private System.Windows.Forms.ToolStripMenuItem английскийЯзыкToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn Lexeme;
         private System.Windows.Forms.DataGridViewTextBoxColumn Position;
+        private System.Windows.Forms.Label label1;
     }
 }
 
