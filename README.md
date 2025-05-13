@@ -54,8 +54,8 @@ my_dict = {1: "Alice", 2: "Vika"}
 
 ## Тестовые примеры
 ![image](https://github.com/user-attachments/assets/98135c61-cb4f-45d5-88db-4dfb14e99a6f)
-![image](https://github.com/user-attachments/assets/f94b8698-c505-49f1-88d8-14a27c05076a)
-![image](https://github.com/user-attachments/assets/b08ba2fa-710d-44a0-8ace-2ca2d28ec43f)
+![image](https://github.com/user-attachments/assets/0d570103-966f-4230-b642-632740d7a765)
+
 
 
 
